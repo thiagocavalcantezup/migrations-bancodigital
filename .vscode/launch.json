@@ -1,0 +1,15 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-BancodigitalApplication<bancodigital>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "com.zupedu.bancodigital.BancodigitalApplication",
+      "projectName": "bancodigital",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
