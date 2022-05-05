@@ -1,0 +1,9 @@
+CREATE TABLE contas (
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  documento_titular VARCHAR(255) NOT NULL,
+  nome_titular VARCHAR(255) NOT NULL,
+  abertura TIMESTAMP NOT NULL,
+  agencia INTEGER NOT NULL,
+  numero BIGINT NOT NULL,
+  saldo DECIMAL(19, 2) NOT NULL
+)
