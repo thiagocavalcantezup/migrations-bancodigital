@@ -71,4 +71,8 @@ public class Conta {
         return id;
     }
 
+    public Set<Pagamento> getPagamentos() {
+        return pagamentos;
+    }
+
 }

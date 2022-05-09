@@ -52,6 +52,22 @@ public class Pagamento {
         return id;
     }
 
+    public LocalDateTime getData() {
+        return data;
+    }
+
+    public String getCodigoDeBarras() {
+        return codigoDeBarras;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public String getCodigoDeConfirmacao() {
+        return codigoDeConfirmacao;
+    }
+
     public void setConta(Conta conta) {
         this.conta = conta;
     }
