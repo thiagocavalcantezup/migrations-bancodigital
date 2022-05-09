@@ -1,0 +1,8 @@
+CREATE TABLE pagamentos (
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  conta_id BIGINT NOT NULL,
+  data TIMESTAMP NOT NULL,
+  codigo_de_barras VARCHAR(255) NOT NULL,
+  valor DECIMAL(19, 2) NOT NULL,
+  codigo_de_confirmacao VARCHAR(255) NOT NULL
+)
