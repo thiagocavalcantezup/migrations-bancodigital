@@ -9,10 +9,13 @@ import javax.validation.Valid;
 import com.zupedu.bancodigital.pagamento.Pagamento;
 import com.zupedu.bancodigital.pagamento.PagamentoRequest;
 import com.zupedu.bancodigital.pagamento.PagamentoResponse;
+import com.zupedu.bancodigital.produto.Produto;
+import com.zupedu.bancodigital.produto.ProdutoRepository;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,11 +30,14 @@ public class ContaController {
 
     public final static String BASE_URI = "/contas";
     public final static String PAGAMENTO_URI = "/pagamentos";
+    public final static String PRODUTO_URI = "/produtos";
 
     private final ContaRepository contaRepository;
+    private final ProdutoRepository produtoRepository;
 
-    public ContaController(ContaRepository contaRepository) {
+    public ContaController(ContaRepository contaRepository, ProdutoRepository produtoRepository) {
         this.contaRepository = contaRepository;
+        this.produtoRepository = produtoRepository;
     }
 
     @Transactional
@@ -82,6 +88,31 @@ public class ContaController {
                           .toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @PatchMapping("/{contaId}" + PRODUTO_URI + "/{produtoId}")
+    public ResponseEntity<Void> contratar(@PathVariable Long contaId,
+                                          @PathVariable Long produtoId) {
+        Conta conta = contaRepository.findById(contaId)
+                                     .orElseThrow(
+                                         () -> new ResponseStatusException(
+                                             HttpStatus.NOT_FOUND,
+                                             "Não existe uma conta com o id informado."
+                                         )
+                                     );
+
+        Produto produto = produtoRepository.findById(produtoId)
+                                           .orElseThrow(
+                                               () -> new ResponseStatusException(
+                                                   HttpStatus.NOT_FOUND,
+                                                   "Não existe um produto com o id informado."
+                                               )
+                                           );
+
+        conta.contratar(produto);
+        contaRepository.save(conta);
+
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -11,10 +11,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.zupedu.bancodigital.pagamento.Pagamento;
+import com.zupedu.bancodigital.produto.Produto;
 
 @Entity
 @Table(name = "contas")
@@ -46,6 +50,10 @@ public class Conta {
             CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private Set<Pagamento> pagamentos = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(name = "conta_produto", joinColumns = @JoinColumn(name = "conta_id"), inverseJoinColumns = @JoinColumn(name = "produto_id"))
+    private Set<Produto> produtos = new HashSet<>();
+
     /**
      * @deprecated Construtor de uso exclusivo do Hibernate
      */
@@ -65,6 +73,11 @@ public class Conta {
     public void adicionar(Pagamento pagamento) {
         pagamento.setConta(this);
         pagamentos.add(pagamento);
+    }
+
+    public void contratar(Produto produto) {
+        produto.getContas().add(this);
+        produtos.add(produto);
     }
 
     public Long getId() {
