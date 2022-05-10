@@ -1,5 +1,6 @@
 package com.zupedu.bancodigital.conta;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -40,6 +41,12 @@ public class ContaControllerTest {
                                + "/1"
                    )
                );
+    }
+
+    @Test
+    void deveriaContratarUmProduto() throws Exception {
+        mockMvc.perform(patch(ContaController.BASE_URI + "/1" + ContaController.PRODUTO_URI + "/1"))
+               .andExpect(status().isNoContent());
     }
 
 }
