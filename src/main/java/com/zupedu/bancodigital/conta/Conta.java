@@ -1,6 +1,7 @@
 package com.zupedu.bancodigital.conta;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -54,6 +55,11 @@ public class Conta {
     @JoinTable(name = "conta_produto", joinColumns = @JoinColumn(name = "conta_id"), inverseJoinColumns = @JoinColumn(name = "produto_id"))
     private Set<Produto> produtos = new HashSet<>();
 
+    private LocalDate dataDeInativacao;
+
+    @Column(nullable = false)
+    private StatusConta status;
+
     /**
      * @deprecated Construtor de uso exclusivo do Hibernate
      */
@@ -61,13 +67,15 @@ public class Conta {
     public Conta() {}
 
     public Conta(String documentoTitular, String nomeTitular, LocalDateTime abertura, int agencia,
-                 long numero, BigDecimal saldo) {
+                 long numero, BigDecimal saldo, LocalDate dataDeInativacao, StatusConta status) {
         this.documentoTitular = documentoTitular;
         this.nomeTitular = nomeTitular;
         this.abertura = abertura;
         this.agencia = agencia;
         this.numero = numero;
         this.saldo = saldo;
+        this.dataDeInativacao = dataDeInativacao;
+        this.status = status;
     }
 
     public void adicionar(Pagamento pagamento) {
