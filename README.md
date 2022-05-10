@@ -2,4 +2,5 @@
 
 ## Adicionando Flywaydb ao projeto e criando as primeiras Migrations
 
-Configurando e utilizando o Flywaydb no projeto de Banco Digital
+- Configurando e utilizando o Flywaydb no projeto de Banco Digital
+- Revertendo migração executada em produção
