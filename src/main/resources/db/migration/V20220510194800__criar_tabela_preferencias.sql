@@ -1,0 +1,6 @@
+CREATE TABLE preferencias (
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  descricao VARCHAR(120),
+  tipo VARCHAR(120),
+  valor DECIMAL(19, 2)
+);
